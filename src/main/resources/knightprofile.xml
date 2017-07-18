@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="SlayDragon" class="springinaction.braveknight.beans.SlayDragonQuest">
+        <constructor-arg value="#{T(System).out}"/>
+    </bean>
+    <bean id="SavePrincess" class="springinaction.braveknight.anno.SavePrincessQuest">
+        <constructor-arg value="Diana"/>
+    </bean>
+    <!--<beans profile="SlayDragon">
+        <bean id="knight" class="springinaction.braveknight.beans.BraveKnight">
+            <constructor-arg ref="SlayDragon"/>
+        </bean>
+    </beans>-->
+    <beans profile="SavePrincess">
+        <bean id="knight" class="springinaction.braveknight.anno.BraveKnight">
+            <constructor-arg ref="SavePrincess"/>
+        </bean>
+    </beans>
+</beans>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+    <bean id="knight" class="springinaction.braveknight.beans.BraveKnight"
+          c:quest-ref="savePrincessQuest"/>
+    <bean id="slayDragonQuest" class="springinaction.braveknight.beans.SlayDragonQuest" c:stream="#{T(System).out}"/>
+    <bean id="savePrincessQuest" class="springinaction.braveknight.anno.SavePrincessQuest" c:_0="Mario"/>
+
+    <bean id="minstrel" class="springinaction.braveknight.beans.Minstrel"/>
+    <aop:config>
+        <aop:aspect ref="minstrel">
+            <aop:pointcut id="embark" expression="execution(* *.embarkonQuest(..))"/>
+            <aop:before method="singBeforeQuest"
+                        pointcut-ref="embark"/>
+            <aop:after method="singAfterQuest" pointcut-ref="embark"/>
+        </aop:aspect>
+    </aop:config>
+</beans>
